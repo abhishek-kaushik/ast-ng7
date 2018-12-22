@@ -1,0 +1,19 @@
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+  <h5 *ngIf="success">Expression is valid!</h5>
+
+  <label>
+    Expression:
+    <input type="text" formControlName="expression">
+    <div *ngIf="submitted && messageForm.controls.expression.errors" class="error">
+      <div *ngIf="messageForm.controls.expression.errors.required">Expression is required</div>
+    </div>
+  </label>
+
+  <input type="submit" value="Calculate" class="cta">
+
+</form>
+
+<div *ngIf="output" class="margin-top-20">
+  Output: {{output}}
+</div>

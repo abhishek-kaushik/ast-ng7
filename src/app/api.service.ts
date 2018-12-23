@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { Data } from './data';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +17,11 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  calculate(value: string): Observable<Object> {
-    return this.httpClient.post<Object>(
+  calculate(value: string): Observable<Data> {
+    return this.httpClient.post<Data>(
       'http://localhost:8000/calc',
-      { 'expression': value },
-      this.httpOptions);
+      `expression=${value}`,
+      this.httpOptions
+    );
   }
 }

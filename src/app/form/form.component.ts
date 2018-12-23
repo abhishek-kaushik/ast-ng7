@@ -2,12 +2,16 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ApiService } from '../api.service';
+import { Calculate } from '../../utils/calculate';
+
+import { Data } from '../data';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
+
 export class FormComponent implements OnInit {
 
   @Input()
@@ -18,13 +22,18 @@ export class FormComponent implements OnInit {
   success = false;
   output: number;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
+  private calculate:Calculate = new Calculate;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
+  ) {
     this.messageForm = this.formBuilder.group({
       expression: ['', Validators.required]
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.messageForm.invalid) {
@@ -38,7 +47,7 @@ export class FormComponent implements OnInit {
         this.first();
         break;
       case 'second':
-        // lol;
+        this.second();
         break;
       case 'third':
         // lol;
@@ -46,9 +55,17 @@ export class FormComponent implements OnInit {
     }
   }
 
-  private first() {
+  private first(): void {
+    this.calculate.solve(this.messageForm.controls.expression.value);
+
+    this.output = parseInt(this.calculate.get(), 10);
+  }
+
+  private second(): object {
     return this.apiService.calculate(this.messageForm.controls.expression.value)
-      .subscribe(data => this.output = data.result);
+      .subscribe((data: Data): void => {
+        this.output = data.result;
+      });
   }
 
   ngOnInit() {

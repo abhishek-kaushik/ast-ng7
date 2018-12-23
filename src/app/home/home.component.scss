@@ -1,0 +1,17 @@
+.home{
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+
+  li{
+    a {
+      padding: 1.5em;
+      text-transform: uppercase;
+      font-size: .8em;
+
+      &:hover {
+          color: #8E2BFF;
+      }
+  }
+  }
+}

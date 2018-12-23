@@ -15,11 +15,13 @@ export class ApiService {
     })
   };
 
+  url = 'http://localhost:8000/calc';
+
   constructor(private httpClient: HttpClient) { }
 
   calculate(value: string): Observable<Data> {
     return this.httpClient.post<Data>(
-      'http://localhost:8000/calc',
+      this.url,
       `expression=${value}`,
       this.httpOptions
     );

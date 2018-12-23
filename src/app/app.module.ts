@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
-import { ThirdComponent } from './third/third.component';
 import { FormComponent } from './form/form.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +17,8 @@ import { FormComponent } from './form/form.component';
     NavComponent,
     FirstComponent,
     SecondComponent,
-    ThirdComponent,
-    FormComponent
+    FormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +28,6 @@ import { FormComponent } from './form/form.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
